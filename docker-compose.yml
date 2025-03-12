@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - "9010:3000"
     volumes:
       # Mount source code but exclude node_modules to avoid overwriting the container's modules
       - ./:/app
