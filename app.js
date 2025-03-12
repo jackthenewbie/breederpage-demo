@@ -36,7 +36,7 @@ const User = require('./Model/users');
 const path = require('path');
 
 // Serving the public folder as static
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'Public')));
 
 // Importing Multer for uploading Images
 const multer = require('multer');

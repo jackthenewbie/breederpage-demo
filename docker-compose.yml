@@ -21,6 +21,7 @@ services:
       - default
       - mongodb-network
     restart: unless-stopped
+    command: pnpm start
 
 networks:
   default:
