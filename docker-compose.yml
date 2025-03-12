@@ -2,18 +2,30 @@ version: '3.8'
 
 services:
   node-app:
-    container_name: breederpage-node-app
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "9010:3000"
+      - "3000:3000"
     volumes:
       # Mount source code but exclude node_modules to avoid overwriting the container's modules
       - ./:/app
       - /app/node_modules
     environment:
       - NODE_ENV=development
+      # Default MongoDB connection that works with the default network
+      - MONGO_URI=${MONGO_URI:-mongodb://localhost:27017/mydatabase}
     env_file:
       - .env
+    networks:
+      - default
+      - mongodb-network
     restart: unless-stopped
+
+networks:
+  default:
+    # This is the default network that will be created if no external network exists
+  mongodb-network:
+    # This allows connecting to an external network if it exists, otherwise falls back to default
+    external: true
+    name: ${MONGODB_NETWORK:-mongodb-network}
