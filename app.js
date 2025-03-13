@@ -37,7 +37,7 @@ const path = require('path');
 
 // Serving the public folder as static
 app.use(express.static(path.join(__dirname, 'Public')));
-
+console.log("Public path:" + path.join(__dirname, 'Public'));
 // Importing Multer for uploading Images
 const multer = require('multer');
 
