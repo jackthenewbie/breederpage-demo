@@ -4,7 +4,7 @@ const app = express();
 
 // MongoDB
 const mongoose = require('mongoose');
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI ="mongodb://web:breeder2313@25.52.149.174:27020" //process.env.MONGODB_URI
 //mongodb+srv://harsimar:harsimar123@cluster0.wp4m7y7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0//
 // MongoDB Sessions
 const session = require('express-session');
