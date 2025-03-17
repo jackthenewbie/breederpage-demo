@@ -4,7 +4,7 @@ const app = express();
 
 // MongoDB
 const mongoose = require('mongoose');
-const MONGODB_URI ="" //process.env.MONGODB_URI
+const MONGODB_URI = process.env.MONGODB_URI
 //mongodb+srv://harsimar:harsimar123@cluster0.wp4m7y7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0//
 // MongoDB Sessions
 const session = require('express-session');
@@ -37,7 +37,7 @@ const path = require('path');
 
 // Serving the public folder as static
 app.use(express.static(path.join(__dirname, 'Public')));
-console.log("Public path:" + path.join(__dirname, 'Public'));
+
 // Importing Multer for uploading Images
 const multer = require('multer');
 
