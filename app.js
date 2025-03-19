@@ -4,7 +4,7 @@ const app = express();
 
 // MongoDB
 const mongoose = require('mongoose');
-const MONGODB_URI = process.env.MONGODB_URI
+const MONGODB_URI = `mongodb://${encodeURIComponent(process.env.MONGODB_USER)}:${encodeURIComponent(process.env.MONGODB_PASS)}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DB}?authSource=admin`;
 //mongodb+srv://harsimar:harsimar123@cluster0.wp4m7y7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0//
 // MongoDB Sessions
 const session = require('express-session');
@@ -88,8 +88,11 @@ app.use(uploadRoutes);
 
 console.log('Connecting to MongoDB database');
 const bcryptjs = require('bcryptjs');
-
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, {
+    user: process.env.MONGODB_USER,
+    pass: process.env.MONGODB_PASS,
+    dbName: "poodle"
+  })
     .then(result => {
         console.log('Connected To Food Truck App Database Successfully')
         User.findOne()
