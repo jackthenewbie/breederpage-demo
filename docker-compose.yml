@@ -3,6 +3,7 @@ version: '3.8'
 name: breederpage-demo
 services:
   node-app:
+    image: wbdecjacob/breederpage-demo-node-app:latest
     build:
       context: .
       dockerfile: Dockerfile

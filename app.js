@@ -4,7 +4,7 @@ const app = express();
 
 // MongoDB
 const mongoose = require('mongoose');
-const MONGODB_URI = `mongodb://${encodeURIComponent(process.env.MONGODB_USER)}:${encodeURIComponent(process.env.MONGODB_PASS)}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DB}?authSource=admin`;
+let MONGODB_URI = `${process.env.PROTOCOL}://${encodeURIComponent(process.env.MONGODB_USER)}:${encodeURIComponent(process.env.MONGODB_PASS)}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DB}?authSource=admin`;
 //mongodb+srv://harsimar:harsimar123@cluster0.wp4m7y7.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0//
 // MongoDB Sessions
 const session = require('express-session');
