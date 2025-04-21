@@ -1,4 +1,6 @@
 <!-- Page Start HTML -->
+<link rel="stylesheet" href="../Public/CSS/main.css" />
+<noscript><link rel="stylesheet" href="../Public/CSS/noscript.css" /></noscript>
 <%- include('./homeIncludes/header.ejs') %>
     <!-- Header -->
     <header>
@@ -14,25 +16,19 @@
                 </div>
                 <div>
                     <h1>Roaming Flavors: Explore Canada's Food Trucks</h1>
-                    <!-- <h1>Explore the Delicious Diversity of Food Trucks</h1> -->
                     <p>Embark on a Flavorful Journey Through Canada's Food Truck Scene. Taste, Explore, Indulge -
                         Where
                         Every
                         Bite Tells a Story!</p>
-                    <!-- <a class="btnTeal btn" href="">Explore Food Trucks</a>
-                <a class="btnWhite btn" href="">About Us</a> -->
                 </div>
             </div>
-
-            <!-- Search Bar -->
-            <%- include('./homeIncludes/searchBar.ejs') %>
     </header>
     <!-- Deals of the day -->
     <%- include('./homeIncludes/dealsOfTheDay.ejs') %>
 
 
 
-        <div style="background-color: white; padding: 20px 0;">
+        <div>
             <section class="container">
 
                 <h1 style="margin-bottom: 20px;" class="heading">Find Food Truck's by Cusines</h1>
@@ -92,7 +88,12 @@
         </div>
         <!-- Top Rated Food Trucks -->
         <%- include('./homeIncludes/topRatedFoodTrucks.ejs') %>
-
+        <script src="../Public/JS/jquery.min.js"></script>
+		<script src="../Public/JS/jquery.scrollex.min.js"></script>
+		<script src="../Public/JS/browser.min.js"></script>
+		<script src="../Public/JS/breakpoints.min.js"></script>
+		<script src="../Public/JS/util.js"></script>
+		<script src="../Public/JS/main.js"></script>
 
 
             <!-- Footer -->

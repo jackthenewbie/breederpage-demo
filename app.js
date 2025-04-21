@@ -31,7 +31,6 @@ app.use(
     })
 );
 
-const User = require('./Model/users');
 
 // Importing Path
 const path = require('path');
@@ -77,15 +76,15 @@ app.set('views', 'Views')
 
 // Importing the routers
 const homeRoutes = require('./Routes/home')
-const authRoutes = require('./Routes/auth')
-const dashboardRoutes = require('./Routes/dashboard')
-const uploadRoutes = require('./Routes/uploadImage')
+// const authRoutes = require('./Routes/auth')
+// const dashboardRoutes = require('./Routes/dashboard')
+// const uploadRoutes = require('./Routes/uploadImage')
 
 app.use(homeRoutes.router);
-app.use(authRoutes.router);
-app.use(dashboardRoutes.router);
-app.use(dashboardRoutes.router);
-app.use(uploadRoutes);
+// app.use(authRoutes.router);
+// app.use(dashboardRoutes.router);
+// app.use(dashboardRoutes.router);
+// app.use(uploadRoutes);
 
 console.log('Connecting to MongoDB database');
 const bcryptjs = require('bcryptjs');
@@ -96,38 +95,6 @@ mongoose.connect(MONGODB_URI, {
   })
     .then(result => {
         console.log('Connected To Food Truck App Database Successfully')
-        User.findOne()
-            .then(user => {
-                if (!user) {
-                    const date = new Date();
-                    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-                    const dateNow = date.toLocaleDateString('en-US', options);
-                    const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
-                    const time = new Date().toLocaleTimeString('en-US', options2);
-                    console.log('No User Exists Till Now, Thereofore creating our first user');
-                    let password = 'admin123'
-
-                    bcryptjs.hash(password, 12)
-                        .then(hashPassword => {
-                            const user = new User({
-                                firstName: "Harsimar Kaur",
-                                lastName: "Bhatia",
-                                email: "harsimar@gmail.com",
-                                password: hashPassword,
-                                userType: 'admin',
-                                dateCreated: dateNow,
-                                timeCreated: time
-                            })
-                            user.save().then(result => {
-                                console.log(result);
-                            });
-                        })
-                } else {
-                    // User Found
-                    // console.log(user);
-                }
-            })
-        // Starting the server
         app.listen(3000, () => {
             console.log('Listening on port 3000');
         })

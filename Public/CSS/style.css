@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url(fontawesome-all.min.css);
+@import url("https://fonts.googleapis.com/css?family=Raleway:200,700|Source+Sans+Pro:300,600,300italic,600italic");
 
 :root {
     --orange: rgb(198, 101, 11);
@@ -17,60 +18,35 @@
 
 nav {
     display: flex;
-    flex-direction: column;
-    padding: 10px;
+    padding: 2vh;
     justify-content: center;
     align-items: center;
-    transition: 0.3s all linear;
 }
 
 .logoNav img {
-    height: 90px;
+    display: none;
 }
+
 
 nav ul {
     display: flex;
     justify-content: space-between;
-    max-width: 1100px;
-    margin-top: 10px;
+    max-width: 100%;
+    margin-top: 6%;
 }
-
-nav ul li a {
-    margin: 10px;
-    font-size: 24px;
-    font-family: "Oleo Script", system-ui;
-    font-weight: 300;
-    font-style: normal;
-    padding: 14px;
-    /* color: rgb(255, 255, 255); */
-    /* color: rgb(12, 169, 169); */
-    color: var(--beige);
-}
-
-nav ul li a:hover {
-    color: var(--orange);
-    transition: 0.3s all linear;
-}
-
 .listContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 85%;
+    display:flex;
+    justify-content: center;
+    width: 100%;
     align-items: center;
 }
 
-.listContainer ul:nth-child(2) li a {
-    margin-right: 4px;
-}
-
 header {
-    background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.672)), url(../IMG/homeheader.jpg) center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.672)), url(../images/bg.jpg) center/cover no-repeat;
     padding-bottom: 30px;
 }
 
 #headerContainer h1 {
-    color: var(--beige);
-    font-family: "Oleo Script", system-ui;
     font-weight: 300;
     font-style: normal;
     font-size: 35px;
@@ -79,7 +55,6 @@ header {
 #headerContainer p {
     color: rgb(255, 255, 255);
     font-size: 22px;
-    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
     border-left: 7px solid white;
@@ -168,7 +143,6 @@ header {
 }
 
 .foodTruckContent h3 {
-    font-family: "Oleo Script", system-ui;
     font-weight: 100;
     font-style: normal;
     font-size: 24px;
@@ -233,25 +207,24 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 20px;
+    margin-top: -0.8vh;
 }
 
 #searchBar form {
-    background-color: white;
+
     padding: 10px;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 3vh;
 
 }
 
 #searchBar input {
-    width: 600px;
-    font-size: 18px;
+    width: 100%;
+    font-size: 1.3vh;
+    height:4vh;
     padding: 4px;
-    color: rgb(66, 66, 66);
+    color: white;
     border: none;
     letter-spacing: 2px;
-    padding-left: 9px;
 }
 
 #searchBar input:focus {
@@ -283,7 +256,6 @@ header {
     padding-right: 30px;
     color: gold;
     letter-spacing: 3px;
-    font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-style: normal;
     font-size: 15px;
@@ -294,7 +266,6 @@ header {
 }
 
 .dealsContainer {
-    background: linear-gradient(rgb(255, 255, 255), rgba(0, 0, 0, 0.672)), url(https://images.pexels.com/photos/3023476/pexels-photo-3023476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1) no-repeat center/cover;
     padding-bottom: 25px;
 }
 
@@ -309,7 +280,6 @@ header {
 .footer h3 {
     color: #242424;
     text-transform: uppercase;
-    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
     font-size: 22px;
@@ -323,7 +293,6 @@ header {
 .footerList ul li a,
 .footerCopyright {
     color: #555555;
-    font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
@@ -358,7 +327,6 @@ header {
     display: none;
 }
 
-
 .closeNavBar {
     display: none;
 }
@@ -370,42 +338,44 @@ header {
 @media screen and (max-width:1050px) {
 
     .responsiveNavbar {
-        background-color: rgb(255, 255, 255);
+        background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.672)), url(../images/pic09.jpg) center/cover no-repeat;       
         height: 100vh;
         position: fixed;
         z-index: 2;
         top: 0;
-        width: 320px;
+        width: 40%;
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        left: -320px;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        transition: 0.3s all linear;
+        justify-content:space-between;
+        left: -600px;
+        transition: 0.4s all linear;
     }
 
     .openNavbar {
         left: 0px;
     }
-
     .responsiveNavbar .listContainer ul,
     .responsiveNavbar .listContainer {
+        margin: auto;
         flex-direction: column;
     }
 
     .responsiveNavbar .logoNav img {
-        width: 200px;
-        height: 120px;
-        margin-bottom: 30px;
+        width: 12vh;
+        height: 12vh;
+        margin-bottom: 12vh;
+        display: flex;
     }
 
 
     .responsiveNavbar .listContainer ul {
-        margin-bottom: 10px;
+        margin-bottom: 5vh;
     }
 
     .responsiveNavbar .navBtns li {
-        margin-bottom: 30px;
+        margin-bottom: 2vh;
+        margin-right: 2vh;
+        justify-content:space-between;
     }
 
     .responsiveNavbar .closeNavBar {
@@ -413,7 +383,7 @@ header {
         position: absolute;
         top: 0;
         right: 0;
-        font-size: 25px;
+        font-size: 1vh;
         margin: 20px;
         color: red;
         cursor: pointer;
@@ -424,19 +394,15 @@ header {
     .responsiveOpenBtn {
         right: 0;
         position: absolute;
-        margin: 30px;
+        margin: 1vh;
         cursor: pointer;
-        font-size: 33px;
-        color: var(--orange);
-        background-color: transparent;
+        font-size: 1vh;
         border: none;
         transition: 0.3s all linear;
         display: block;
+        text-decoration: none !important;
     }
 
-    .responsiveOpenBtn:hover {
-        color: var(--beige);
-    }
 
     .responsiveNavbar .icons {
         display: flex;
@@ -468,9 +434,11 @@ header {
         padding: 10px;
         height: 180px;
     }
-
+    
     #searchBar input {
-        width: 440px;
+        width: 12vh;
+        margin-left: 1vh;
+        height: 3vh;
     }
 
     /* Food truck grid responsive */
@@ -761,7 +729,6 @@ header {
 
 .reviewsBtn {
     background-color: red;
-    font-family: "Poppins", sans-serif;
     font-weight: 500;
     font-size: 14px;
     padding: 6px 14px;
@@ -786,7 +753,6 @@ header {
 
 .deal {
     font-size: 21px;
-    font-family: "Poppins", sans-serif;
     font-weight: 500;
     border-width: 6px;
     border-style: solid;
@@ -1026,7 +992,6 @@ header {
 
 #locations input {
     font-size: 25px;
-    font-family: "Poppins", sans-serif;
     font-weight: 300;
     font-style: normal;
     border: none;
@@ -1050,7 +1015,7 @@ header {
     display: inline-block;
     height: 300px;
     width: 100%;
-    background: linear-gradient(rgba(255, 255, 255, 0)60%, #040303cb), url(https://images.pexels.com/photos/1438672/pexels-photo-1438672.jpeg?auto=compress&cs=tinysrgb&w=600) no-repeat center center/cover;
+
     border-radius: 25px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
     transition: 0.7s all linear;
@@ -1079,7 +1044,6 @@ header {
     border: none;
     font-size: 38px;
     padding: 5px 13px;
-    font-family: "Oleo Script", system-ui;
     font-weight: 400;
     font-style: normal;
     position: absolute;

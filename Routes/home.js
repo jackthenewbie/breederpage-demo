@@ -4,10 +4,10 @@ const homeController = require('../Controller/home')
 router.get('/',homeController.getHomePage)
 
 
-router.get('/foodTrucks/:truckId',homeController.getFoodTruck)
+router.get('/foodTrucks/:truckId',homeController.getDog)
 
-router.get('/writeReview/:truckId',homeController.getWriteReviewPage);
-router.post('/addReview',homeController.addReview);
+// router.get('/writeReview/:truckId',homeController.getWriteReviewPage);
+// router.post('/addReview',homeController.addReview);
 router.post('/search',homeController.postSearch);
 
 

@@ -9,9 +9,77 @@ li {
 a {
   text-decoration: none;
 }
+/* .topnav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #3b3f58;
+  height: 10vh;
+  padding: 1em 2em;
+  border-radius: 12px;
+  margin: 1em;
+  color: white;
+
+}
+
+.topnav .nav-links {
+  display: flex;
+  gap: 1.5em;
+}
+
+.topnav .nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.4em 0.6em;
+  border-radius: 8px;
+
+}
+
+.topnav .nav-links a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+
+.search-bar input{
+  width: 100%;
+  padding: 0.6em 0.6em 0.6em 2.2em;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  background-color: #f2f2f2;
+  color: black;
+  font-size: larger;
+}
+
+
+.filters {
+  background: #f7f7f7;
+  padding: 1em;
+  border-radius: 8px;
+  margin-bottom: 2em;
+}
+
+.search-results {
+  background: #fff;
+  padding: 1em;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  min-height: 200px;
+} */
+
+.search-bar {
+margin-top: 0.85%;
+  position: relative;
+  align-content: right;
+  width: 100%;
+  margin-left: 3%;
+  
+}
 
 /* Fonts */
-.oleo-script-regular {
+/* .oleo-script-regular {
   font-family: "Oleo Script", system-ui;
   font-weight: 400;
   font-style: normal;
@@ -21,7 +89,7 @@ a {
   font-family: "Oleo Script", system-ui;
   font-weight: 700;
   font-style: normal;
-}
+} */
 
 .heading, .headingBlack {
   font-family: "Oleo Script", system-ui;

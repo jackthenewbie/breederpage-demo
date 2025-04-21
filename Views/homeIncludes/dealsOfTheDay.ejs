@@ -1,82 +1,94 @@
-<section class="dealsContainer" style="background:white;">
-    <div class="container " style="padding-bottom: 0;">
-        <h1 class="heading">Deals of the day</h1>
-        <p class="headingDescription">Don't miss out on these fantastic offers from some of the best food trucks in town. Treat yourself and a friend to a delightful culinary experience without breaking the bank!</p>
-        <br>
-        <div id="dealsOftheDay" class="" style="display: flex; gap: 8px; overflow: scroll;padding: 14px 10px; ">
-            <% topDiscountedTrucks.forEach(foodTruck=>{%>
-                <a href="/foodTrucks/<%= foodTruck._id%>">
-                    <div class="foodTruckGrid" style="border-radius: 10px; overflow: hidden;">
-                    <div class="foodTruckImg" style="overflow: hidden;">
-                        <img src="<%= foodTruck.images[0].mainImage%>"
-                        alt="">
-                        <div class="dealOfTheDay">
-                            <p><i class="fa-solid fa-crown"></i> Flat <%= foodTruck.discountToday%>% OFF</p>
-                        </div>
-                    </div>
-                    <div class="foodTruckContent">
-                        <div style="margin-top: 10px;" class="flexRow spaceBetween alignItemCenter">
-                            <h3 class="heading"><%= foodTruck.name%></h3>
-                            <p class="rating flexRow alignItemCenter"> <span><%= foodTruck.rating%></span> &nbsp; <i
-                                    class="fa-solid fa-star"></i></p>
-                        </div>
-                        <div class="flexRow alignItemCenter truckGridLocation">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <p><%= foodTruck.address%></p>
-                        </div>
-                        <!-- <div class="gridTags">
-                    <p>Burgers</p>
-                    <p>Softies</p>
-                    <p>Tacos</p>
-                    <p>Bubble Tea</p>
-                </div> -->
-                        <br>
+
+
+<section id="wrapper">
+<!-- One -->
+    <section id="one" class="wrapper spotlight style1">
+        <div class="inner">
+            <section class="dealsContainer">
+                <div class="container " style="padding-bottom: 0;">
+                    <h1 class="heading">Deals of the day</h1>
+                    <p class="headingDescription">Don't miss out on these fantastic offers from some of the best food trucks in town. Treat yourself and a friend to a delightful culinary experience without breaking the bank!</p>
+                    <br>
+                    <div id="dealsOftheDay" class="" style="display: flex; gap: 8px; overflow: scroll;padding: 14px 10px; ">
+                        <% topDiscountedTrucks.forEach(foodTruck=>{%>
+                            <a href="/foodTrucks/<%= foodTruck._id%>">
+                                <div class="foodTruckGrid" style="border-radius: 10px; overflow: hidden;">
+                                <div class="foodTruckImg" style="overflow: hidden;">
+                                    <img src="<%= foodTruck.images[0].mainImage%>"
+                                    alt="">
+                                    <div class="dealOfTheDay">
+                                        <p><i class="fa-solid fa-crown"></i> Flat <%= foodTruck.discountToday%>% OFF</p>
+                                    </div>
+                                </div>
+                                <div class="foodTruckContent">
+                                    <div style="margin-top: 10px;" class="flexRow spaceBetween alignItemCenter">
+                                        <h3 class="heading"><%= foodTruck.name%></h3>
+                                        <p class="rating flexRow alignItemCenter"> <span><%= foodTruck.rating%></span> &nbsp; <i
+                                                class="fa-solid fa-star"></i></p>
+                                    </div>
+                                    <div class="flexRow alignItemCenter truckGridLocation">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <p><%= foodTruck.address%></p>
+                                    </div>
+                                    <!-- <div class="gridTags">
+                                <p>Burgers</p>
+                                <p>Softies</p>
+                                <p>Tacos</p>
+                                <p>Bubble Tea</p>
+                            </div> -->
+                                    <br>
+                                </div>
+                            </div>
+                        </a>
+                        <%})%>
+            
                     </div>
                 </div>
-            </a>
-            <%})%>
-
+            </section>
         </div>
-    </div>
-</section>
-<section class="dealsContainer" style="background:white;">
-    <div class="container " style="padding-bottom: 0;">
-        <h1 class="heading">Buy One Get One Free Deals !</h1>
-        <p class="headingDescription">Here is a curated list of food trucks offering the irresistible 'Buy One Get One Free' (BOGO) deal! Indulge in delicious meals while enjoying the value of getting two for the price of one.</p>
-        <br>
-        <div id="dealsOftheDay" class="" style="display: flex; gap: 8px; overflow: scroll;padding: 14px 10px; ">
-            <% bogoTrucks.forEach(foodTruck=>{%>
-                <a href="/foodTrucks/<%= foodTruck._id%>">
-                    <div class="foodTruckGrid" style="border-radius: 10px; overflow: hidden;">
-                    <div class="foodTruckImg" style="overflow: hidden;">
-                        <img src="<%= foodTruck.images[0].mainImage%>"
-                        alt="">
-                        <div class="dealOfTheDay">
-                            <p><i class="fa-solid fa-crown"></i> BOGO <%if(foodTruck.discountToday>0){%>+ Flat <%= foodTruck.discountToday%>% OFF<%}%></p>
+    </section>
+    <section id="two" class="wrapper alt spotlight style2">
+        <section class="dealsContainer">
+            <div class="container " style="padding-bottom: 0;">
+                <h1 class="heading">Buy One Get One Free Deals !</h1>
+                <p class="headingDescription">Here is a curated list of food trucks offering the irresistible 'Buy One Get One Free' (BOGO) deal! Indulge in delicious meals while enjoying the value of getting two for the price of one.</p>
+                <br>
+                <div id="dealsOftheDay" class="" style="display: flex; gap: 8px; overflow: scroll;padding: 14px 10px; ">
+                    <% bogoTrucks.forEach(foodTruck=>{%>
+                        <a href="/foodTrucks/<%= foodTruck._id%>">
+                            <div class="foodTruckGrid" style="border-radius: 10px; overflow: hidden;">
+                            <div class="foodTruckImg" style="overflow: hidden;">
+                                <img src="<%= foodTruck.images[0].mainImage%>"
+                                alt="">
+                                <div class="dealOfTheDay">
+                                    <p><i class="fa-solid fa-crown"></i> BOGO <%if(foodTruck.discountToday>0){%>+ Flat <%= foodTruck.discountToday%>% OFF<%}%></p>
+                                </div>
+                            </div>
+                            <div class="foodTruckContent">
+                                <div style="margin-top: 10px;" class="flexRow spaceBetween alignItemCenter">
+                                    <h3 class="heading"><%= foodTruck.name%></h3>
+                                    <p class="rating flexRow alignItemCenter"> <span><%= foodTruck.rating%></span> &nbsp; <i
+                                            class="fa-solid fa-star"></i></p>
+                                </div>
+                                <div class="flexRow alignItemCenter truckGridLocation">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <p><%= foodTruck.address%></p>
+                                </div>
+                                <!-- <div class="gridTags">
+                            <p>Burgers</p>
+                            <p>Softies</p>
+                            <p>Tacos</p>
+                            <p>Bubble Tea</p>
+                        </div> -->
+                                <br>
+                            </div>
                         </div>
-                    </div>
-                    <div class="foodTruckContent">
-                        <div style="margin-top: 10px;" class="flexRow spaceBetween alignItemCenter">
-                            <h3 class="heading"><%= foodTruck.name%></h3>
-                            <p class="rating flexRow alignItemCenter"> <span><%= foodTruck.rating%></span> &nbsp; <i
-                                    class="fa-solid fa-star"></i></p>
-                        </div>
-                        <div class="flexRow alignItemCenter truckGridLocation">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <p><%= foodTruck.address%></p>
-                        </div>
-                        <!-- <div class="gridTags">
-                    <p>Burgers</p>
-                    <p>Softies</p>
-                    <p>Tacos</p>
-                    <p>Bubble Tea</p>
-                </div> -->
-                        <br>
-                    </div>
+                    </a>
+                    <%})%>
+
                 </div>
-            </a>
-            <%})%>
-
-        </div>
-    </div>
+            </div>
+        </section>
+    </section>
 </section>
+    

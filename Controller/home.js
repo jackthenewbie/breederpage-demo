@@ -1,4 +1,4 @@
-const FoodTruck = require('../Model/foodTruck');
+const dogs = require('../Model/dog');
 const { validationResult } = require('express-validator');
 
 // exports.getHomePage = (req, res, next) => {
@@ -19,7 +19,7 @@ const { validationResult } = require('express-validator');
 
 exports.getHomePage = (req, res, next) => {
     console.log('Welcome to home page');
-    FoodTruck.find()
+    dogs.find()
         .then(trucks => {
 
             const bogoTrucks = trucks.filter(truck => truck.bogoOn && truck.bogoOn.length > 0);
@@ -50,13 +50,13 @@ exports.getHomePage = (req, res, next) => {
             next(err);
         });
 }
-exports.getFoodTruck = (req, res, next) => {
-    const truckId = req.params.truckId;
-    FoodTruck.findById(truckId)
-        .then(truck => {
+exports.getDog = (req, res, next) => {
+    const dogId = req.params.dogId;
+    dogs.findById(dogId)
+        .then(dog => {
             return res.render('foodtruck', {
                 pageTitle: "Taste On Wheels",
-                truck: truck
+                truck:dog
             })
         })
         .catch(err => {
@@ -72,71 +72,71 @@ exports.getAbout = (req, res, next) => {
 }
 
 
-exports.getWriteReviewPage = (req, res, next) => {
-    const truckId = req.params.truckId;
-    if (!req.session.isLoggedIn) {
-        req.flash('error', 'Login to Review Food Truck');
-        req.flash('className', 'errorFlash');
-        return res.redirect('/login');
-    }
+// exports.getWriteReviewPage = (req, res, next) => {
+//     const truckId = req.params.truckId;
+//     if (!req.session.isLoggedIn) {
+//         req.flash('error', 'Login to Review Food Truck');
+//         req.flash('className', 'errorFlash');
+//         return res.redirect('/login');
+//     }
 
-    FoodTruck.findById(truckId)
-        .then(truck => {
-            return res.render('review', {
-                pageTitle: `${truck.name} Review`,
-                truck: truck
-            })
-        })
-        .catch(err => {
-            console.log('Truck Id Wrong, Truck not found');
-            return res.redirect('/');
-        })
+//     FoodTruck.findById(truckId)
+//         .then(truck => {
+//             return res.render('review', {
+//                 pageTitle: `${truck.name} Review`,
+//                 truck: truck
+//             })
+//         })
+//         .catch(err => {
+//             console.log('Truck Id Wrong, Truck not found');
+//             return res.redirect('/');
+//         })
 
-}
+// }
 
-exports.addReview = (req, res, next) => {
-    const truckId = req.body.truckId;
-    const rating = req.body.ratingValue;
+// exports.addReview = (req, res, next) => {
+//     const truckId = req.body.truckId;
+//     const rating = req.body.ratingValue;
 
-    let testimonials =
-    {
-        review: req.body.review,
-        name: req.body.name,
-        rating: req.body.ratingGiven,
-        userId: req.session.user._id
-    }
+//     let testimonials =
+//     {
+//         review: req.body.review,
+//         name: req.body.name,
+//         rating: req.body.ratingGiven,
+//         userId: req.session.user._id
+//     }
 
 
-    FoodTruck.findById(truckId)
-        .then(truck => {
-            console.log(truck.testimonials)
-            truck.testimonials.push(testimonials);
-            truck.save()
-                .then(savedTruck => {
-                    let rating = 0;
-                    let lastIndex = 0;
-                    savedTruck.testimonials.forEach((testimonial, index) => {
-                        rating = rating + parseInt(testimonial.rating);
-                        lastIndex = index + 1;
-                    })
-                    console.log(rating);
-                    console.log(lastIndex);
+//     FoodTruck.findById(truckId)
+//         .then(truck => {
+//             console.log(truck.testimonials)
+//             truck.testimonials.push(testimonials);
+//             truck.save()
+//                 .then(savedTruck => {
+//                     let rating = 0;
+//                     let lastIndex = 0;
+//                     savedTruck.testimonials.forEach((testimonial, index) => {
+//                         rating = rating + parseInt(testimonial.rating);
+//                         lastIndex = index + 1;
+//                     })
+//                     console.log(rating);
+//                     console.log(lastIndex);
 
-                    let newRating = (rating / lastIndex).toFixed(2);
-                    console.log('Rating', newRating);
+//                     let newRating = (rating / lastIndex).toFixed(2);
+//                     console.log('Rating', newRating);
 
-                    savedTruck.rating = newRating;
-                    savedTruck.save().then(result => {
-                        console.log(result);
-                        return res.redirect(`/foodTrucks/${truckId}`)
-                    });
-                })
-        })
-        .catch(err => {
-            console.log('Truck Id Wrong, Truck not found');
-            return res.redirect('/');
-        })
-}
+//                     savedTruck.rating = newRating;
+//                     savedTruck.save().then(result => {
+//                         console.log(result);
+//                         return res.redirect(`/foodTrucks/${truckId}`)
+//                     });
+//                 })
+//         })
+//         .catch(err => {
+//             console.log('Truck Id Wrong, Truck not found');
+//             return res.redirect('/');
+//         })
+// }
 
 exports.postSearch = (req, res, next) => {
     const search = req.body.search;
@@ -155,7 +155,7 @@ exports.postSearch = (req, res, next) => {
 
 exports.getSearch = (req, res, next) => {
     const search = req.params.searchedText;
-    FoodTruck.find(
+    dogs.find(
         {
             $or: [
                 {
@@ -183,12 +183,12 @@ exports.getSearch = (req, res, next) => {
                 }
             ],
 
-        }).then(truck => {
-            console.log(truck);
+        }).then(dog => {
+            console.log(dog);
             return res.render('search', {
                 pageTitle: `Search ${search}`,
                 url: '/search',
-                truck: truck,
+                truck: dog,
                 message: `Search Results for ${search} `,
                 search: search
             });
