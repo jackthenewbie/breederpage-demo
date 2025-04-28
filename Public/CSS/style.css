@@ -88,7 +88,6 @@ header {
     width: 100%;
     border-radius: 10px !important;
     overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     transition: 0.3s all linear;
     background-color: white;
     min-height: 320px;
@@ -108,10 +107,6 @@ header {
     padding: 20px;
 }
 
-#dealsOftheDay .foodTruckGrid:hover,
-#topRatedFoodTrucksScroll .foodTruckGrid:hover {
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 16px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-}
 
 #dealsOftheDay,
 #topRatedFoodTrucksScroll {
@@ -273,8 +268,8 @@ header {
 .footer {
     display: flex;
     padding: 40px 20px;
-    background-color: gainsboro;
-    color: rgb(132, 131, 131);
+    background-color: rgb(219, 219, 219);
+    color: rgb(0, 0, 0);
 }
 
 .footer h3 {

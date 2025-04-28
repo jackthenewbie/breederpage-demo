@@ -91,14 +91,6 @@ margin-top: 0.85%;
   font-style: normal;
 } */
 
-.heading, .headingBlack {
-  font-family: "Oleo Script", system-ui;
-  font-weight: 400;
-  font-style: normal;
-  font-size: 40px;
-  color: var(--orange);
-  letter-spacing: 2px;
-}
 
 .headingBlack{
 color: #494949;

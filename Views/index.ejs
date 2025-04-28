@@ -15,11 +15,8 @@
                     <div class="logoHeader"><img src="/img/logo.png" alt=""></div>
                 </div>
                 <div>
-                    <h1>Roaming Flavors: Explore Canada's Food Trucks</h1>
-                    <p>Embark on a Flavorful Journey Through Canada's Food Truck Scene. Taste, Explore, Indulge -
-                        Where
-                        Every
-                        Bite Tells a Story!</p>
+                    <h1>Loyal Companions: Discover Canada's Finest Dog Breeders</h1>
+                    <p>Begin Your Journey to Find the Perfect Furry Friend. Trust, Care, Quality  Where Every Puppy Begins Their Story!</p>
                 </div>
             </div>
     </header>
@@ -28,7 +25,7 @@
 
 
 
-        <div>
+        <!-- <div>
             <section class="container">
 
                 <h1 style="margin-bottom: 20px;" class="heading">Find Food Truck's by Cusines</h1>
@@ -66,16 +63,17 @@
                 </article>
 
             </section>
-        </div>
-        <div style="background-color: white; padding: 20px 0;">
+        </div> -->
+        <div>
             <section class="container">
 
-                <h1 style="margin-bottom: 25px;" class="heading">Find Food Truck's in your city !</h1>
+                <h1 style="margin-bottom: 25px;" class="heading">Find your pet's breed!</h1>
 
                 <article id="locationsContainer">
-                    <% var cities=["Toronto", "Montreal" , "Vancouver" , "Calgary" , "Edmonton" , "Ottawa" , "Winnipeg"
-                        , "Quebec City" , "Hamilton" , "London" , "Kitchener" , "Victoria" , "Halifax" , "Windsor"
-                        ,"Regina" , "St. John's" , "Cambridge" , "Brampton" , , "Guelph" , "Brantford" ]; %>
+                    <% var cities=["Labrador Retriever", "German Sheperd" , "Golden Retriever" , "French Bulldog" , "English Bulldog" ,
+                     "Poddle" , "Beagle"
+                        , "Rottweiler" , "Dachshund" , "Siberian Husky" , "Boxer" , "Doberman Pinscher" , "Australian Sheperd" , "Welsh Corgi"
+                        ,"Great Dane" , "Shih Tzu" , "Border Collie" , "Chihuahua" , , "Pug" , "Mountain Dog" ]; %>
                         <% cities.forEach(function(city) { %>
                             <form id="locations" action="/search/<%= city %>">
                                 <input class="locationsInput" type="text" value="<%= city %>" readonly>
