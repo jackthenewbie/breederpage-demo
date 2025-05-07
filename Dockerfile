@@ -8,7 +8,7 @@ RUN npm install -g pnpm
 WORKDIR /app
 
 # Copy package.json and pnpm-lock.yaml first to leverage Docker cache
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json .
 
 # Install dependencies with pnpm
 RUN pnpm install
