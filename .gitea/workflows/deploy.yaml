@@ -13,8 +13,9 @@ jobs:
     runs-on: ser3.local.host
     steps:
       - name: Build and push Docker image to registry
-        uses: ./.gitea/workflows/build.yaml
+        uses: build.yaml
   deploy:
+    needs: build
     runs-on: google-cloud-cli
     steps:
       - name: Google Auth
