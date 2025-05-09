@@ -11,7 +11,7 @@ env:
 jobs:
   build:
     runs-on: ser3.local.host
-    uses: ./.gitea/workflows/build.yaml@main
+    uses: ./.gitea/workflows/build.yaml
   deploy:
     needs: build
     runs-on: google-cloud-cli
