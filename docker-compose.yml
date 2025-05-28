@@ -2,13 +2,14 @@ version: '3.8'
 
 name: breederpage-demo
 services:
-  node-app:
+  breederpage-demo:
+    container_name: breederpage-demo
     image: wbdecjacob/breederpage-demo-node-app:latest
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "9010:3000"
+    #ports:
+    #  - "9010:3000"
     volumes:
       # Mount source code but exclude node_modules to avoid overwriting the container's modules
       - ./:/app
@@ -18,10 +19,17 @@ services:
       # Default MongoDB connection that works with the default network
       - MONGO_URI=${MONGO_URI:-mongodb://localhost:27017/mydatabase}
     env_file:
-      - .env
+      - path: .env
     networks:
       - default
       - mongodb-network
+      - rproxy-traefik
+    labels:
+      - "traefik.docker.network=rproxy-traefik"
+      - "traefik.enable=true"                                                    # Enable Traefik for this container :contentReference[oaicite:0]{index=0}
+      - "traefik.http.routers.breederpage-demo.rule=Host(`breeder.decoyer.win`)"               # Route based on your domain :contentReference[oaicite:1]{index=1} 
+      - "traefik.http.routers.breederpage-demo.entrypoints=websecure"                        # Bind to the HTTPS entrypoint :contentReference[oaicite:2]{index=2}
+      - "traefik.http.routers.breederpage-demo.tls=true"
     restart: unless-stopped
     command: pnpm start
 
@@ -32,3 +40,5 @@ networks:
     # This allows connecting to an external network if it exists, otherwise falls back to default
     external: true
     name: ${MONGODB_NETWORK:-mongodb-network}
+  rproxy-traefik:
+    external: true
