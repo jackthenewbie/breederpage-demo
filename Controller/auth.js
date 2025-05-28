@@ -30,8 +30,8 @@ exports.getLogin = (req, res, next) => {
 
 // Post Login 
 exports.postLogin = (req, res, next) => {
-
     const errors = validationResult(req);
+    console.log(req)
     if (!errors.isEmpty()) {
         let className = 'errorFlash'
         return res.render('authentication/login', {
@@ -168,7 +168,6 @@ exports.postSignUp = (req, res, next) => {
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
             const dateNow = date.toLocaleDateString('en-US', options);
             const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
-            const time = new Date().toLocaleTimeString('en-US', options2);
 
             // console.log(req.body);
 
@@ -176,8 +175,7 @@ exports.postSignUp = (req, res, next) => {
             bcryptjs.hash(req.body.password, 12)
                 .then(hashedPassword => {
                     feedback = [];
-                    dateCreated = dateNow;
-                    timeCreated = time;
+                    dateCreated = dateNow
 
                     // Adding new User
                     const user = new User({
