@@ -184,9 +184,7 @@ exports.postSignUp = (req, res, next) => {
                         firstName: firstName,
                         lastName: lastName,
                         email: email,
-                        feedback: [],
                         dateCreated: dateNow,
-                        timeCreated: time,
                         userType: 'user',
                         password: hashedPassword
                     })

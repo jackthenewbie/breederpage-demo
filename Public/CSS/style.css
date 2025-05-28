@@ -203,6 +203,7 @@ header {
     align-items: center;
     justify-content: center;
     margin-top: -0.8vh;
+    height: 100%;
 }
 
 #searchBar form {
@@ -214,13 +215,16 @@ header {
 
 #searchBar input {
     width: 100%;
-    font-size: 1.3vh;
+    font-size: 100%;
     height:4vh;
     padding: 4px;
     color: white;
     border: none;
     letter-spacing: 2px;
 }
+
+
+
 
 #searchBar input:focus {
     outline: none;

@@ -5,17 +5,24 @@ const breederSchema = new Schema({
     firstName: {
         type: String,
         required: true
-    }, lastName: {
+    }, 
+    lastName: {
         type: String,
         required: true
     },
     email: {
         type: String,
         required: true,
-    }, password: {
+    },
+    userType:{
+        type: String,
+        required:true
+    }, 
+    password: {
         type: String,
         required: true
-    }, dateCreated: {
+    }, 
+    dateCreated: {
         type: Date,
         required: true
     }

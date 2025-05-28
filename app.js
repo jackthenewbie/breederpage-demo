@@ -76,12 +76,12 @@ app.set('views', 'Views')
 
 // Importing the routers
 const homeRoutes = require('./Routes/home')
-// const authRoutes = require('./Routes/auth')
+const authRoutes = require('./Routes/auth')
 // const dashboardRoutes = require('./Routes/dashboard')
 // const uploadRoutes = require('./Routes/uploadImage')
 
 app.use(homeRoutes.router);
-// app.use(authRoutes.router);
+app.use(authRoutes.router);
 // app.use(dashboardRoutes.router);
 // app.use(dashboardRoutes.router);
 // app.use(uploadRoutes);
