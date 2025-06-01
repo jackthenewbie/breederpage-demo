@@ -7,7 +7,7 @@ exports.getDashboard = (req, res, next) => {
 
     FoodTruck.find({ userId: userId })
         .then(truck => {
-            // console.log(truck);
+            console.log(truck);
             const reversedTruck= truck.reverse();
 
             return res.render('dashboard/dashboard', {

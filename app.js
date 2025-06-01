@@ -75,13 +75,15 @@ app.set('view engine', 'ejs');
 app.set('views', 'Views')
 
 // Importing the routers
-const homeRoutes = require('./Routes/home')
-const authRoutes = require('./Routes/auth')
+const homeRoutes = require('./Routes/home');
+const authRoutes = require('./Routes/auth');
+const breederRoutes = require('./Routes/breeder');
 // const dashboardRoutes = require('./Routes/dashboard')
 // const uploadRoutes = require('./Routes/uploadImage')
 
 app.use(homeRoutes.router);
 app.use(authRoutes.router);
+app.use(breederRoutes.router);
 // app.use(dashboardRoutes.router);
 // app.use(dashboardRoutes.router);
 // app.use(uploadRoutes);
