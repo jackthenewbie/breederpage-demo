@@ -1,0 +1,94 @@
+<div class="sleek-file-uploader">
+    <form action="/Utils/uploadFile" method="post" enctype="multipart/form-data" id="documentUploadForm_<%= Math.random().toString(36).substring(7) %>"> <%# Unique ID if multiple on page %>
+        <div class="file-drop-zone">
+            <input type="file" name="testDoc" id="fileInput_<%= Math.random().toString(36).substring(7) %>" class="file-input-hidden" accept=".pdf,.png,.jpg,.jpeg" required>
+            <label for="fileInput_<%= Math.random().toString(36).substring(7) %>" class="file-select-label">
+                <span class="file-select-main-text">Drag & Drop or Click to Select File</span>
+                <span class="file-select-accepted-types">Accepted: PDF, PNG, JPG/JPEG</span>
+            </label>
+        </div>
+
+        <div class="file-preview-area">
+            <span id="fileNameDisplay_<%= Math.random().toString(36).substring(7) %>" class="file-name-display-text">No file selected.</span>
+        </div>
+
+        <button type="submit" class="submit-action-button">
+            Upload Document
+        </button>
+    </form>
+    <input type="text" value="<%=uploadStatus%>" name="uploadStatus" id="" readonly>
+</div>
+
+<script>
+    // Script to handle file name display.
+    // Ensure this script runs after the DOM, or use DOMContentLoaded.
+    // This script assumes unique IDs if you plan to use multiple uploaders on one page.
+    // For simplicity, I'm querying based on the static part of the ID if you remove the random suffix,
+    // or you'd pass the random suffix from EJS to JS.
+    // A better approach for multiple instances would be to scope the querySelector to the uploader div.
+
+    // This simplified version assumes only one uploader or careful ID management.
+    // For a more robust multi-instance solution, you'd initialize each uploader instance.
+    (function() {
+        const uploaderInstances = document.querySelectorAll('.sleek-file-uploader');
+
+        uploaderInstances.forEach(uploader => {
+            const form = uploader.querySelector('form');
+            const fileInput = form.querySelector('.file-input-hidden');
+            const fileNameDisplay = form.querySelector('.file-name-display-text');
+            const fileSelectMainText = form.querySelector('.file-select-main-text');
+            const dropZone = form.querySelector('.file-drop-zone');
+
+            if (!fileInput || !fileNameDisplay || !fileSelectMainText || !dropZone) {
+                console.warn('File uploader elements not found within an instance:', uploader);
+                return;
+            }
+
+            fileInput.addEventListener('change', function() {
+                if (this.files && this.files.length > 0) {
+                    let fileName = this.files[0].name;
+                    if (fileName.length > 30) { // Truncate long file names
+                        fileName = fileName.substring(0, 15) + "..." + fileName.substring(fileName.length - 10);
+                    }
+                    fileNameDisplay.textContent = `File: ${fileName}`;
+                    fileNameDisplay.classList.add('is-selected');
+                    fileSelectMainText.textContent = 'File Ready for Upload';
+                    dropZone.classList.add('file-selected-state');
+                } else {
+                    fileNameDisplay.textContent = 'No file selected.';
+                    fileNameDisplay.classList.remove('is-selected');
+                    fileSelectMainText.textContent = 'Drag & Drop or Click to Select File';
+                    dropZone.classList.remove('file-selected-state');
+                }
+            });
+
+            // Basic drag and drop styling feedback
+            ['dragenter', 'dragover'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropZone.classList.add('is-dragging-over');
+                }, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                dropZone.addEventListener(eventName, (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropZone.classList.remove('is-dragging-over');
+                }, false);
+            });
+
+            // Handle dropped files (optional, as click is primary)
+            dropZone.addEventListener('drop', (e) => {
+                // e.preventDefault(); // Already done
+                // e.stopPropagation(); // Already done
+                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                    fileInput.files = e.dataTransfer.files; // Assign dropped files to the input
+                    const changeEvent = new Event('change', { bubbles: true }); // Trigger change event
+                    fileInput.dispatchEvent(changeEvent);
+                }
+            });
+        });
+    })();
+</script>

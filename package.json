@@ -11,7 +11,8 @@
     "#Controller/*": "./Controller/*.js",
     "#Model/*": "./Models/*.js",
     "#Middleware/*": "./Middlewear/*.js",
-    "#Routes/*": "./Routes/*.js"
+    "#Routes/*": "./Routes/*.js",
+    "#Utils/*": "./Utils/*.js"
   },
   "author": "",
   "license": "ISC",
