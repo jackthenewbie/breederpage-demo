@@ -1,5 +1,3 @@
-version: '3.8'
-
 name: breederpage-demo
 services:
   breederpage-demo:
@@ -26,15 +24,24 @@ services:
       - rproxy-traefik
     labels:
       - "traefik.docker.network=rproxy-traefik"
-      - "traefik.enable=true"                                                    # Enable Traefik for this container :contentReference[oaicite:0]{index=0}
-      - "traefik.http.routers.breederpage-demo.rule=Host(`breeder.decoyer.win`)"               # Route based on your domain :contentReference[oaicite:1]{index=1} 
-      - "traefik.http.routers.breederpage-demo.entrypoints=websecure"                        # Bind to the HTTPS entrypoint :contentReference[oaicite:2]{index=2}
-      - "traefik.http.routers.breederpage-demo.tls=true"
+      - "traefik.enable=true"
+      - "traefik.http.routers.breederpage-demo.rule=Host(`breeder.decoyer.win`)"
     restart: unless-stopped
     command: pnpm start
-
+    depends_on:
+      - rclone
+  rclone:
+    container_name: rclone
+    image: rclone/rclone:latest
+    command: rcd --rc-addr=:$RCL_PORT --rc-user=$RCL_USERNAME --rc-pass=$RCL_PASSWORD --rc-serve -vv
+    networks:
+      - default
+    volumes:
+      - ./rclone.conf:/config/rclone/rclone.conf:ro
+      - ${UPLOAD_PATH}:/data/./${UPLOAD_PATH}:ro
 networks:
   default:
+    name: breederpage-network
     # This is the default network that will be created if no external network exists
   mongodb-network:
     # This allows connecting to an external network if it exists, otherwise falls back to default

@@ -11,18 +11,22 @@
     
     <div class="listContainer">
       <div class="logoNav"><a href="/"><img src="/img/logo.png" alt=""></a></div>
+        
         <ul class="navBtns">
-            <% if(isLoggedIn){%>
-                    <li><a style="font-size: 25px; letter-spacing: 2px;" class="btnDashboard flexRow alignItemCenter" href="/dashboard"><i style="font-size: 25px; margin-right: 8px;" class="fa-solid fa-user"></i> Dashboard</a></li>
-            <% }else{%>  
-                
-                <li><%- include('./searchBar.ejs') %></li>
-                <li><a class="button primary fit" href="/signup">Home</a></li>
-                <li><a class="button primary fit" href="/login">Breeder</a></li>
-                <li><a class="button primary fit" href="/login">New Puppy</a></li>
-                <li><a class="button primary fit" href="/login">Raising a Puppy</a></li>
-                <li><a class="button primary fit" href="/about">About TOW</a></li>               
-                <% }%>
+            <li><%- include('./searchBar.ejs') %></li>
+            <li><a class="button primary fit" href="/signup">Home</a></li>
+            <% if(!isLoggedIn){ %>
+                <li><a class="button primary fit" href="/resource/breeder">Breeder</a></li>
+            <% }else{%>
+                <li><a class="button primary fit" href="/breeder">Breeder</a></li>
+            <% } %>
+            <li><a class="button primary fit" href="/login">New Puppy</a></li>
+            <li><a class="button primary fit" href="/login">Raising a Puppy</a></li>
+            <li><a class="button primary fit" href="/about">About TOW</a></li>               
+            <% if(isLoggedIn)%>
+                    <li><a class="button primary fit" href="/dashboard"><i style="font-size: 25px; margin-right: 8px;" class="fa-solid fa-user"></i> Dashboard</a></li>
+             
+            
          </ul>
     </div>
     <div class="icons">

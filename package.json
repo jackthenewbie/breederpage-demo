@@ -7,6 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js"
   },
+  "imports": {
+    "#Controller/*": "./Controller/*.js",
+    "#Model/*": "./Models/*.js",
+    "#Middleware/*": "./Middlewear/*.js",
+    "#Routes/*": "./Routes/*.js",
+    "#Utils/*": "./Utils/*.js"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -22,7 +29,6 @@
     "express-validator": "^7.0.1",
     "foodtruckapp": "file:",
     "mongoose": "^8.2.2",
-    "multer": "^1.4.5-lts.1",
     "node-appwrite": "^17.0.0",
     "nodemon": "^3.1.0"
   }
