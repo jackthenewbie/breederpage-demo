@@ -1,219 +1,87 @@
-const User = require('../Model/users.js');
-const bcryptjs = require('bcryptjs');
-// const { router } = require('../Routes/dashboard.js');
-const { validationResult } = require('express-validator');
+const { Client, Account, ID } = require('node-appwrite');
 
-// Get Login
+const client = new Client()
+    .setEndpoint('http://localhost:3000/') // Replace with your endpoint
+    .setProject('6862f2df0029e9c34ca7'); // Replace with your project ID
+
+const account = new Account(client);
 exports.getLogin = (req, res, next) => {
-    let message = req.flash('error');
-    let className = req.flash('className');
-
-    console.log('Class Name: ', className)
-
-    // Checking if there is any error
-    if (message.length > 0) {
-        message = message[0];
-        console.log('Error Message: ', message);
-    } else {
-        message = null;
-        console.log('Error Message: ', message);
-    }
-
-    console.log('Welcome to login page');
+    // Render stays the same
     res.render('authentication/login', {
         pageTitle: "Login | Taste On Wheels",
-        message: message,
-        className: className,
+        message: req.flash('error')[0] || null,
+        className: req.flash('className'),
         email: ''
-    })
-}
+    });
+};
+exports.postLogin = async (req, res, next) => {
+    const { email, password } = req.body;
 
-// Post Login 
-exports.postLogin = (req, res, next) => {
-    const errors = validationResult(req);
-    console.log(req)
-    if (!errors.isEmpty()) {
-        let className = 'errorFlash'
-        return res.render('authentication/login', {
+    try {
+        const session = await account.createEmailSession(email, password);
+
+        // Store session/token data as needed
+        req.session.user = session;
+        req.session.isLoggedIn = true;
+        await req.session.save();
+
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.log(error);
+        req.flash('error', 'Incorrect Email or Password');
+        req.flash('className', 'errorFlash');
+        res.render('authentication/login', {
             pageTitle: "Login | Taste On Wheels",
-            message: errors.array()[0].msg,
-            className: className,
+            message: 'Incorrect Email or Password',
+            className: 'errorFlash',
             email: req.body.email
-        })
+        });
     }
-    console.log(req.body);
-    const email = req.body.email;
-    const password = req.body.password;
-
-    console.log("Someone is trying to login");
-    console.log(email);
-    console.log(password);
-    User.findOne({ email: email })
-        .then(user => {
-            if (!user) {
-                console.log("Email not found")
-                // req.flash('error', 'Incorrect Email or Password');
-                // req.flash('className', 'errorFlash');
-                return res.render('authentication/login', {
-                    pageTitle: "Login | Taste On Wheels",
-                    message: 'Incorrect Email or Password',
-                    className: 'errorFlash',
-                    email: req.body.email
-                })
-            }
-            else {
-                bcryptjs.compare(password, user.password)
-                    .then(doMatch => {
-                        console.log("password match: " + doMatch);
-                        if (!doMatch) {
-                            req.flash('error', 'Invalid Password');
-                            req.flash('className', 'errorFlash');
-
-                            console.log('SESSION STATUS ' + req.session.isLoggedIn);
-
-                            return res.render('authentication/login', {
-                                pageTitle: "Login | Taste On Wheels",
-                                message: 'Incorrect Password',
-                                className: 'errorFlash',
-                                email: req.body.email
-                            })
-                        }
-                        // Starting new session
-                        req.session.user = user;
-                        req.session.isLoggedIn = 'true';
-                        console.log(req.session);
-                        req.session.save();
-
-                        res.redirect('/dashboard');
-
-                        console.log('Logged In, current session =', req.session);
-                    })
-            }
-        })
-}
-
-// Get Sign Up
+};
 exports.getSignUp = (req, res, next) => {
-    console.log('Welcome to sign up page');
+    // Render stays the same
+    res.render('authentication/login', {
+        pageTitle: "Login | Taste On Wheels",
+        message: req.flash('error')[0] || null,
+        className: req.flash('className'),
+        email: ''
+    });
+};
+exports.postSignUp = async (req, res, next) => {
+    const { firstName, lastName, email, password } = req.body;
 
-    let message = req.flash('error');
-    let className = req.flash('className');
+    try {
+        // 1. Create Appwrite account
+        await account.create(ID.unique(), email, password, `${firstName} ${lastName}`);
 
-    console.log('Class Name: ', className)
+        // 2. Flash success message
+        req.flash('error', 'Account created successfully');
+        req.flash('className', 'successFlash');
 
-    // Checking if there is any error
-    if (message.length > 0) {
-        message = message[0];
-        console.log('Error Message: ', message);
-    } else {
-        message = null;
-        console.log('Error Message: ', message);
-    }
+        res.redirect('/login');
+    } catch (error) {
+        console.log(error);
 
-    res.render('authentication/signup', {
-        pageTitle: "Sign Up | Taste On Wheels",
-        message: message,
-        className: className,
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-
-    })
-}
-
-// Post Signup
-exports.postSignUp = (req, res, next) => {
-
-    const firstName = req.body.firstName;
-    const lastName = req.body.lastName;
-    const password = req.body.password;
-    let className = 'errorFlash'
-
-    const email = req.body.email;
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.render('authentication/signup', {
+        req.flash('error', 'Account with this email already exists');
+        req.flash('className', 'errorFlash');
+        res.render('authentication/signup', {
             pageTitle: "Sign Up | Taste On Wheels",
-            message: errors.array()[0].msg,
-            className: className,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            password: password
-        })
+            message: 'Account with this email already exists',
+            className: 'errorFlash',
+            firstName,
+            lastName,
+            email,
+            password
+        });
     }
-
-    console.log(email);
-
-    User.find({ email: req.body.email })
-        .then(user => {
-            if (user.length !== 0) {
-                req.flash('error', 'Account with this email already exists');
-                req.flash('className', 'errorFlash');
-                console.log("user",user);
-                console.log('Account with this email already exists');
-                return res.render('authentication/signup', {
-                    pageTitle: "Sign Up | Taste On Wheels",
-                    message: 'Account with this email already exists',
-                    className: className,
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email,
-                    password: password
-                })
-            }
-            // Getting date and time of signup
-            const date = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            const dateNow = date.toLocaleDateString('en-US', options);
-            const options2 = { hour: 'numeric', minute: 'numeric', hour12: true, timeZone: 'America/Toronto' };
-
-            // console.log(req.body);
-
-            // Hashing the password using bcryptjs
-            bcryptjs.hash(req.body.password, 12)
-                .then(hashedPassword => {
-                    feedback = [];
-                    dateCreated = dateNow
-
-                    // Adding new User
-                    const user = new User({
-                        firstName: firstName,
-                        lastName: lastName,
-                        email: email,
-                        dateCreated: dateNow,
-                        userType: 'user',
-                        password: hashedPassword
-                    })
-                    user.save().then(result => {
-                        console.log(result)
-
-                        // req.session.user = user;
-                        // req.session.isLoggedIn = 'true'
-                        // console.log(req.session);
-                        // req.session.save();
-                        // console.log('SESSION STATUS ' + req.session.isLoggedIn);
-
-                        req.flash('error', 'Account created successfully');
-                        req.flash('className', 'successFlash');
-
-                        console.log('New Account Created')
-                        return res.redirect('/login');
-
-                    });
-                })
-        })
-}
-
-
-
-// Post Log Out
-exports.postLogOut = (req, res, next) => {
-    req.session.destroy(err => {
-        console.log(err);
-        // Cannot Log Out
-        return res.redirect('/');
-    })
-    console.log("Logged Out")
-}
+};
+exports.postLogOut = async (req, res, next) => {
+    try {
+        await account.deleteSession('current');
+        req.session.destroy(() => res.redirect('/'));
+        console.log("Logged Out");
+    } catch (error) {
+        console.log(error);
+        res.redirect('/');
+    }
+};

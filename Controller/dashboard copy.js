@@ -1,5 +1,8 @@
-const Dog = require('../Model/dog')
-const { validationResult } = require('express-validator');
+const { Client, Databases, ID } = require('node-appwrite');
+const client = new Client()
+    .setEndpoint('http://localhost:3000/') // Replace with your endpoint
+    .setProject('6862f2df0029e9c34ca7'); // Replace with your project ID
+const databases = new Databases(client);
 
 exports.getDashboard = (req, res, next) => {
     console.log('req.session.isLoggedIn:', req.session.isLoggedIn)
@@ -48,24 +51,27 @@ exports.getAddFoodTruck = (req, res, next) => {
         videos:''
     })
 }
-
-exports.postAddFoodTruck = (req, res, next) => {
-    const errors = validationResult(req);
-    const userId = req.session.user._id;
-
-    console.log(req.body);
-    const name = req.body.name;
-    const birthday = req.body.birthday;
-    const breed = req.body.breed;
-    const age = calculateAge(req.body.birthday);
-    const characteristics = req.body.characteristics;
-    const images = req.body.images;
-    const videos = req.body.videos;
-
-    if (!errors.isEmpty()) {
-        let className = 'errorFlash'
-        return res.render('dashboard/addFoodTruck', {
-            message: errors.array()[0].msg,
+exports.postAddFoodTruck =(req, res, user) => {
+  try {
+    const response = databases.createDocument(
+      '68722e470007a7932a00',    
+      '68722e5c0007d22b8d77',     
+      ID.unique(),     
+      {
+        dogName: req.body.name,
+        birthday: req.body.birthday,
+        breed: req.body.breed,
+        age: calculateAge(req.body.birthday),
+        characteristics: req.body.characteristics,
+        images: req.body.images,
+        videos: req.body.videos
+      }
+    );
+    console.log('Document created:', response);
+  } catch (error) {
+    console.error('Error creating document:', error);
+    return res.render('dashboard/addFoodTruck', {
+            message: error,
             className: className,
             pageTitle: 'Dashboard',
             url: '/addFoodTruck',
@@ -76,42 +82,73 @@ exports.postAddFoodTruck = (req, res, next) => {
             age:age,
             characteristics:characteristics,
             images: images,
-            videos:videos,        
-        })
-    } else {
-        const dog = new Dog({
-            userId: userId,
-            name: name,
-            birthday: birthday,
-            breed: breed,
-            age:age,
-            characteristics:characteristics,
-            images: images,
-            videos:videos, 
-            // images: [
-            //     {
-            //         mainImage: imageUrl,
-            //     }
-            // ],
-        })
-
-
-        dog.save()
-            .then(result => {
-                console.log(result);
-                let dogId = result._id.toString()
-                console.log(dogId)
-                return res.redirect(`/myTrucks`)
-            })
-            .catch(result => {
-                console.log(result);
-                req.flash('error', 'Sorry, some database error occured');
-                req.flash('className', 'errorFlash');
-                return res.redirect(`/addFoodTruck`)
-
-            })
-    }
+            videos:videos,       
+  })
 }
+}
+// exports.postAddFoodTruck = (req, res, next) => {
+//     const errors = validationResult(req);
+//     const userId = req.session.user._id;
+
+//     console.log(req.body);
+//     const name = req.body.name;
+//     const birthday = req.body.birthday;
+//     const breed = req.body.breed;
+//     const age = calculateAge(req.body.birthday);
+//     const characteristics = req.body.characteristics;
+//     const images = req.body.images;
+//     const videos = req.body.videos;
+
+//     if (!errors.isEmpty()) {
+//         let className = 'errorFlash'
+//         return res.render('dashboard/addFoodTruck', {
+//             message: errors.array()[0].msg,
+//             className: className,
+//             pageTitle: 'Dashboard',
+//             url: '/addFoodTruck',
+//             truckId: '',
+//             name: name,
+//             birthday: birthday,
+//             breed: breed,
+//             age:age,
+//             characteristics:characteristics,
+//             images: images,
+//             videos:videos,        
+//         })
+//     } else {
+//         const dog = new Dog({
+//             userId: userId,
+//             name: name,
+//             birthday: birthday,
+//             breed: breed,
+//             age:age,
+//             characteristics:characteristics,
+//             images: images,
+//             videos:videos, 
+//             // images: [
+//             //     {
+//             //         mainImage: imageUrl,
+//             //     }
+//             // ],
+//         })
+
+
+//         dog.save()
+//             .then(result => {
+//                 console.log(result);
+//                 let dogId = result._id.toString()
+//                 console.log(dogId)
+//                 return res.redirect(`/myTrucks`)
+//             })
+//             .catch(result => {
+//                 console.log(result);
+//                 req.flash('error', 'Sorry, some database error occured');
+//                 req.flash('className', 'errorFlash');
+//                 return res.redirect(`/addFoodTruck`)
+
+//             })
+//     }
+// }
 
 
 exports.postTruckImages = (req, res, next) => {

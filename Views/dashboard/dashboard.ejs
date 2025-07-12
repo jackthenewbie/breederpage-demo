@@ -2,7 +2,7 @@
     <!-- Dashboard Navbar -->
     <%- include('./dashboardIncludes/dashboardNav.ejs') %>
 
-        <main id="dashboardMain" class="">
+        <main id="dashboardMain">
             <!-- Dashboard Sidebar -->
             <%- include('./dashboardIncludes/sidebar.ejs') %>
 
@@ -10,113 +10,15 @@
                     <div class="dashboardContainer">
                         <!-- Dashboard Content Start -->
 
-                        <h1 class="pageTitle"><span><a href="/">Home / </a> </span>Dashboard</h1>
-                        <!-- Saved Trucks -->
-                        <!-- <article id="savedTrucks" class="dashboardContentContainer">
-                            <h2 class="flexRow spaceBetween alignItemCenter">Your Favorite Food Trucks <i
-                                    style="font-size: 30px;" class="fa-solid fa-star"></i></h2>
-                            <div class="grid">
-                                <a href="/foodTrucks">
-                                    <div class="foodTruckGrid">
-                                        <div class="foodTruckImg">
-                                            <img src="https://images.pexels.com/photos/2518078/pexels-photo-2518078.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                                alt="">
-                                        </div>
-                                        <div class="foodTruckContent">
-                                            <div style="margin-top: 10px;" class="flexRow spaceBetween alignItemCenter">
-                                                <h3 class="heading">Giani Ice Cream</h3>
-                                                <p class="rating flexRow alignItemCenter"> <span>5</span> &nbsp; <i
-                                                        class="fa-solid fa-star"></i></p>
-                                            </div>
-                                            <div class="flexRow alignItemCenter truckGridLocation">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                                <p>21-B, Avenue, Brampton</p>
-                                            </div>
-                                            <!-- <div class="gridTags">
-                                    <p>Burgers</p>
-                                    <p>Softies</p>
-                                    <p>Tacos</p>
-                                    <p>Bubble Tea</p>
-                                </div> 
-                                            <br>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="/foodTrucks">
-                                    <div class="foodTruckGrid">
-                                        <div class="foodTruckImg">
-                                            <img src="/img/homeheader.jpg" alt="">
-                                        </div>
-                                        <div class="foodTruckContent">
-                                            <div style="margin-top: 10px;" class="flexRow spaceBetween alignItemCenter">
-                                                <h3 class="heading">The Taco and Tea</h3>
-                                                <p class="rating flexRow alignItemCenter"> <span>5</span> &nbsp; <i
-                                                        class="fa-solid fa-star"></i></p>
-                                            </div>
-                                            <div class="flexRow alignItemCenter truckGridLocation">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                                <p>66 Golden St, Kitchener, Waterloo</p>
-                                            </div>
-                                             <div class="gridTags">
-                                    <p>Burgers</p>
-                                    <p>Tacos</p>
-                                    <p>Bubble Tea</p>
-                                    <p>Rolls</p>
-                                    <p>Fish Orley</p>
-                                </div> 
-                                            <br>
-                                        </div>
-                                    </div>
-                                </a>
-
-                                <a href="/foodTrucks">
-                                    <div class="foodTruckGrid">
-                                        <div class="foodTruckImg">
-                                            <img src="https://images.pexels.com/photos/9897458/pexels-photo-9897458.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                                                alt="">
-                                        </div>
-                                        <div class="foodTruckContent">
-                                            <div style="margin-top: 10px;" class="flexRow spaceBetween alignItemCenter">
-                                                <h3 class="heading">Camarao In Box</h3>
-                                                <p class="rating flexRow alignItemCenter"> <span>5</span> &nbsp; <i
-                                                        class="fa-solid fa-star"></i></p>
-                                            </div>
-                                            <div class="flexRow alignItemCenter truckGridLocation">
-                                                <i class="fa-solid fa-location-dot"></i>
-                                                <p>Victroi St, Cambridge</p>
-                                            </div>
-                                            <div class="gridTags">
-                                    <p>Burgers</p>
-                                    <p>Tacos</p>
-                                    <p>Bubble Tea</p>
-                                    <p>Rolls</p>
-                                    <p>Fish Orley</p>
-                                </div> 
-                                            <br>
-                                        </div>
-                                    </div>
-                                </a>
-
-                           
-
-                            </div>
-
-                            <div style="padding-top: 15px;" class="flexRow spaceBetween alignItemCenter">
-                                <a id="viewAllBtn">View All <i class="fa-solid fa-bookmark"></i></a>
-                                <button id="logoutBtn">Edit <i class="fa-solid fa-pen-to-square"></i></button>
-                            </div>
-                        </article> -->
-                        <!-- Your Trucks -->
-
-                        <!-- Dashboard Content End -->
+                        <h1 class="pageTitle"><span><a href="/">Home /</a> </span>Dashboard</h1>
 
                         <article id="savedTrucks" class="dashboardContentContainer" >
-                            <h2 style="padding: 0; margin-bottom: 0;" class="flexRow spaceBetween alignItemCenter">Welcome, <%=user.firstName%>, to Taste On Wheels!
+                            <h2 class="flexRow spaceBetween alignItemCenter">Welcome, <%=user.firstName%>, to Taste On Wheels!
                             </h2>
                         </article>
 
                         <%if(truck.length===0){%>
-                            <section class="dashboardContentContainer" style=" background-color: white;">
+                            <section class="dashboardContentContainer">
                                
                                 <h1 class="heading" style="font-size: 28px;">You have not created any truck yet</h1>
                             </section>
@@ -130,8 +32,7 @@
                                         <article id="savedTrucks" class="dashboardContentContainer"
                                             style="box-shadow: none;">
                                             <h2 class="flexRow spaceBetween alignItemCenter">Your Food Trucks <a
-                                                    href="/myTrucks" id="viewAllBtn">View All <i style="color: white;"
-                                                        class="fa-solid fa-truck-front"></i></a>
+                                                    href="/myTrucks" id="viewAllBtn">View All <i class="fa-solid fa-truck-front"></i></a>
                                             </h2>
                                         </article>
                                         <section id="myTruck">
@@ -165,7 +66,7 @@
                                                 </div>
 
 
-                                                <p style="font-size: 15px; color: rgb(132, 132, 132);">
+                                                <p>
                                                     <%= foodTruck.description%>
                                                 </p>
 
@@ -246,9 +147,7 @@
                                                                             <input type="text" name="truckId"
                                                                                 style="display: none;"
                                                                                 value="<%= foodTruck._id%>" readonly>
-                                                                            <button
-                                                                                style="background-color: rgb(7, 7, 175);"
-                                                                                type="submit" id="viewAllBtn"><i
+                                                                            <button type="submit" id="viewAllBtn"><i
                                                                                     class="fa-solid fa-trash"></i>
                                                                                 Delete</button>
                                                                         </form>
@@ -267,7 +166,7 @@
         </main>
 
         <script src="/js/dashboardSidebar.js"></script>
-
+</body>
 
         <!-- Page Ends  -->
         <%- include('../homeIncludes/pageEnd.ejs') %>

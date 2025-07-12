@@ -1,4 +1,8 @@
-const dogs = require('../Model/dog');
+const {Client, Databases} = require('node-appwrite');
+const client = new Client()
+    .setEndpoint('https://appwrite.decoyer.win/v1')// Replace with your endpoint
+    .setProject('6862f2df0029e9c34ca7');
+const databases = new Databases(client);
 const { validationResult } = require('express-validator');
 
 // exports.getHomePage = (req, res, next) => {
@@ -17,11 +21,11 @@ const { validationResult } = require('express-validator');
 //         })
 // }
 
-exports.getHomePage = (req, res, next) => {
+exports.getHomePage= async (req, res, next)=>{
     console.log('Welcome to home page');
-    dogs.find()
-        .then(trucks => {
-
+    await databases.listDocuments("68722e470007a7932a00","68722e5c0007d22b8d77")
+        .then(results => {
+            const trucks = results.documents;
             const bogoTrucks = trucks.filter(truck => truck.bogoOn && truck.bogoOn.length > 0);
 
 
@@ -49,7 +53,7 @@ exports.getHomePage = (req, res, next) => {
 
             next(err);
         });
-}
+    }
 exports.getDog = (req, res, next) => {
     const dogId = req.params.dogId;
     dogs.findById(dogId)

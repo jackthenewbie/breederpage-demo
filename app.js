@@ -2,18 +2,17 @@
 require('dotenv').config();
 const express = require("express");
 const app = express();
-
-// MongoDB
-const mongoose = require('mongoose');
-
-let MONGODB_URI = `${process.env.PROTOCOL}://${encodeURIComponent(process.env.MONGODB_USER)}:${encodeURIComponent(process.env.MONGODB_PASS)}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DB}?authSource=admin`;
-console.log(MONGODB_URI);
 const session = require('express-session');
-const MongoDBStore = require('connect-mongodb-session')(session);
-const store = new MongoDBStore({
-    uri: MONGODB_URI,
-    collection: 'session'
-})
+// MongoDB
+// const mongoose = require('mongoose');
+
+// let MONGODB_URI = `${process.env.PROTOCOL}://${encodeURIComponent(process.env.MONGODB_USER)}:${encodeURIComponent(process.env.MONGODB_PASS)}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DB}?authSource=admin`;
+// console.log(MONGODB_URI);
+// const MongoDBStore = require('connect-mongodb-session')(session);
+// const store = new MongoDBStore({
+//     uri: MONGODB_URI,
+//     collection: 'session'
+// })
 
 // npm install --save connect-flash
 var flash = require('connect-flash');
@@ -27,7 +26,6 @@ app.use(
         secret: 'my secret',
         resave: 'false',
         saveUninitialized: false,
-        store: store
     })
 );
 
@@ -77,25 +75,25 @@ app.set('views', 'Views')
 // Importing the routers
 const homeRoutes = require('./Routes/home')
 const authRoutes = require('./Routes/auth')
-// const dashboardRoutes = require('./Routes/dashboard')
+const dashboardRoutes = require('./Routes/dashboard')
 // const uploadRoutes = require('./Routes/uploadImage')
 
 app.use(homeRoutes.router);
 app.use(authRoutes.router);
-// app.use(dashboardRoutes.router);
-// app.use(dashboardRoutes.router);
+app.use(dashboardRoutes.router);
 // app.use(uploadRoutes);
 
-console.log('Connecting to MongoDB database');
 const bcryptjs = require('bcryptjs');
-mongoose.connect(MONGODB_URI, {
-    user: process.env.MONGODB_USER,
-    pass: process.env.MONGODB_PASS,
-    dbName: "poodle"
-  })
-    .then(result => {
-        console.log('Connected To Food Truck App Database Successfully')
-        app.listen(3000, () => {
-            console.log('Listening on port 3000');
-        })
-    })
+app.listen(3000, () => {
+           console.log('Listening on port 3000');})
+// mongoose.connect(MONGODB_URI, {
+//     user: process.env.MONGODB_USER,
+//     pass: process.env.MONGODB_PASS,
+//     dbName: "poodle"
+//   })
+//     .then(result => {
+//         console.log('Connected To Food Truck App Database Successfully')
+//         app.listen(3000, () => {
+//             console.log('Listening on port 3000');
+//         })
+//     })

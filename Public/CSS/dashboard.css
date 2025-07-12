@@ -1,12 +1,14 @@
 body{
-    background-color: #f9f9f9
+    -moz-transition: background-color 0.2s ease-in-out;
+	-webkit-transition: background-color 0.2s ease-in-out;
+	-ms-transition: background-color 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out;
+	background-color: rgba(53, 56, 73, 0.95);
 }
 #dashboardNav {
     display: flex;
     justify-content: space-between;
     padding: 11px 35px;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     align-items: center;
     position: fixed;
     width: 100%;
@@ -14,6 +16,7 @@ body{
     padding-left: 330px;
     transition: padding-left 0.3s linear;
     height: 75px;
+    
     /* Only transition the padding-left property */
 }
 
@@ -23,10 +26,8 @@ body{
 
 #dashboardNav ul li {
     font-size: 18px;
-    font-family: "Poppins", sans-serif;
     font-weight: 400;
     font-style: normal;
-    color: #333;
 }
 
 #dashboardNav ul li i {
@@ -41,7 +42,6 @@ body{
 
 #dashboardSidebar {
     width: 310px;
-    background-color: rgb(255, 255, 255);
     height: 100vh;
     position: fixed;
     z-index: 1;
@@ -51,15 +51,21 @@ body{
 }
 
 #dashboardContent {
-    background-color: #f9f9f9;
+    
     width: 100vw;
     height: 100vh;
     padding-left: 310px;
     padding-top: 70px;
     transition: padding-left 0.3s ease-in-out;
+    
 }
 
 .dashboardContainer {
+    -moz-transition: background-color 0.2s ease-in-out;
+	-webkit-transition: background-color 0.2s ease-in-out;
+	-ms-transition: background-color 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out;
+	background-color: rgba(53, 56, 73, 0.95);
     padding: 28px;
 }
 
@@ -136,6 +142,7 @@ body{
     }
 
     #dashboardSidebar {
+        background: linear-gradient(rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.672)), url(../images/pic09.jpg) center/cover no-repeat;    
         left: -310px;
         transition: 0.3s all linear;
     }
@@ -172,13 +179,10 @@ body{
 
 .sidebarNav ul li a:hover {
     border-left: 10px solid var(--orange);
-    background-color: rgb(255, 242, 225);
 }
 
 .active {
     border-left: 10px solid var(--orange) !important;
-    background-color: rgb(255, 242, 225);
-    color: var(--orange);
 }
 
 .sidebarNav ul li i {
@@ -201,8 +205,6 @@ body{
 
 #logoutBtn,
 #viewAllBtn {
-    background-color: rgb(213, 35, 35);
-    color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
@@ -253,7 +255,6 @@ body{
 #savedTrucks {}
 
 .dashboardContentContainer {
-    background-color: white;
     padding: 24px;
     box-shadow: rgba(0, 0, 0, 0.211) 0px 5px 15px;
     border-radius: 10px;
@@ -262,12 +263,8 @@ body{
 
 
 .dashboardContentContainer h2 {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
     letter-spacing: 1px;
-    color: #333;
-    margin-bottom: 16px;
+    margin-bottom: -0.5vh;
     font-size: 30px;
 }
 
