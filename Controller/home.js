@@ -1,7 +1,8 @@
 const {Client, Databases} = require('node-appwrite');
+require('dotenv').config();
 const client = new Client()
-    .setEndpoint('https://appwrite.decoyer.win/v1')// Replace with your endpoint
-    .setProject('6862f2df0029e9c34ca7');
+    .setEndpoint(process.env.endPoint)// Replace with your endpoint
+    .setProject(process.env.PROJECT_ID);
 const databases = new Databases(client);
 const { validationResult } = require('express-validator');
 
@@ -23,7 +24,7 @@ const { validationResult } = require('express-validator');
 
 exports.getHomePage= async (req, res, next)=>{
     console.log('Welcome to home page');
-    await databases.listDocuments("68722e470007a7932a00","68722e5c0007d22b8d77")
+    await databases.listDocuments(process.env.DATABASE_ID,process.env.DOG_COLLECTION_ID)
         .then(results => {
             const trucks = results.documents;
             const bogoTrucks = trucks.filter(truck => truck.bogoOn && truck.bogoOn.length > 0);

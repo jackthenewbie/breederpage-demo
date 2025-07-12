@@ -1,4 +1,5 @@
 const { Client, Databases, ID } = require('node-appwrite');
+require('dotenv').config();
 const client = new Client()
     .setEndpoint('http://localhost:3000/') // Replace with your endpoint
     .setProject('6862f2df0029e9c34ca7'); // Replace with your project ID
