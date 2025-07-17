@@ -1,11 +1,28 @@
 const Dog = require('../Model/dog')
 const { validationResult } = require('express-validator');
+const {Client, Databases, Account} = require('node-appwrite');
+require('dotenv').config();
+const client = new Client()
+    .setEndpoint(process.env.endPoint)// Replace with your endpoint
+    .setProject(process.env.PROJECT_ID);
 
-exports.getDashboard = (req, res, next) => {
+const databases = new Databases(client);
+const account = new Account(client);
+exports.getDashboard = async (req, res, next) => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+    return res.status(401).json({ error: 'No token provided' });
+    }
+
+    const token = authHeader.split(' ')[1];
+    client.setJWT(token)
     console.log('req.session.isLoggedIn:', req.session.isLoggedIn)
-    const userId = req.session.user._id;
-
-    Dog.find({ userId: userId })
+    const user = await account.get();
+    const request = 
+    await databases.listDocuments(process.env.DATABASE_ID,
+                                process.env.DOG_COLLECTION_ID,
+                                [Query.equal(breederId,user.$id)])
         .then(dog => {
             // console.log(truck);
             const reversedTruck= dog.reverse();

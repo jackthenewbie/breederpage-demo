@@ -1,4 +1,5 @@
 <%- include('../homeIncludes/header.ejs') %>
+<script src="/Public/JS/dashboard.js" defer></script>
     <div id="body-wrapper">   
         <section id="authentication">
             <div id="authenticationImage">
@@ -32,11 +33,11 @@
                         <form action="/login" method="post" id="authForm">
                             <div class="col-6 col-12-xsmall">
                                 <label for="demo-email">Email</label>
-                                <input type="email" name="email" id="demo-email" value="" />
+                                <input type="email" autocomplete="email" name="email" id="demo-email" value="" />
                             </div>
                             <div class="col-6 col-12-xsmall">
                                 <label for="demo-password">Password</label>
-                                <input type="password" name="password" id="demo-password" value="" />
+                                <input type="password" autocomplete="current-password" name="password" id="demo-password" value="" />
                             </div>
                             <br>
                             <div class="alignCenter">

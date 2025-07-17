@@ -29,19 +29,19 @@
                     </h1>
                     <form action="/signup" method="post" id="authForm">
                         <label for="firstName">First Name</label>
-                        <input name="firstName" type="text" placeholder="John" value="<%=firstName%>">
+                        <input name="firstName" type="text" autocomplete="given-name" placeholder="John" value="<%=firstName%>">
 
                         <label for="lastName">Last Name</label>
-                        <input name="lastName" type="text" placeholder="Doe" value="<%=lastName%>">
+                        <input name="lastName" type="text" autocomplete="family-name" placeholder="Doe" value="<%=lastName%>">
 
                         <label for="Email">Email</label>
-                        <input name="email" type="text" placeholder="john@gmail.com" value="<%=email%>">
+                        <input name="email" type="text" autocomplete="email" placeholder="john@gmail.com" value="<%=email%>">
 
                         <label for="Password">Password</label>
-                        <input name="password" type="password" placeholder="At least 6 characters" value="<%=password%>">
+                        <input name="password" type="password" autocomplete="new-password" placeholder="At least 6 characters" value="<%=password%>">
 
                         <label for="Password">Confirm Password</label>
-                        <input name="confirmPassword" type="password" placeholder="Enter password again">
+                        <input name="confirmPassword" autocomplete="new-password" type="password" placeholder="Enter password again">
 
                         <br>
                         <div class="alignCenter">
