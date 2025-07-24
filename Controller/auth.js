@@ -2,7 +2,8 @@ const { Client, Account, ID } = require('node-appwrite');
 require('dotenv').config();
 const client = new Client()
     .setEndpoint(process.env.endPoint) 
-    .setProject(process.env.PROJECT_ID); 
+    .setProject(process.env.PROJECT_ID)
+    .setKey(process.env.AUTH_API_KEY);
 
 const account = new Account(client);
 exports.getLogin = (req, res, next) => {
@@ -16,11 +17,16 @@ exports.getLogin = (req, res, next) => {
 };
 exports.postLogin = async (req, res, next) => {
     const { email, password } = req.body;
-
+    
     try {
         const session = await account.createEmailPasswordSession(email, password);
-
-        // Store session/token data as needed
+        res.cookie('session', session.secret, { 
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+            expires: new Date(session.expire),
+            path: '/',
+        });
         req.session.user = session;
         req.session.isLoggedIn = true;
         await req.session.save();

@@ -1,3 +1,4 @@
+
 dashboardNav = document.getElementById('dashboardNav');
 dashboardMain = document.getElementById('dashboardMain');
 dashboardMenuBtn = document.querySelector('.dashboardMenuBtn');
